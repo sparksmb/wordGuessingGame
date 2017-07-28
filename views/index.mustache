@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Play a Game?</title>
+  </head>
+
+  <body>
+    <h1>Let's play a game!</h1>
+    <h1>
+      {{#guessesLeft}}
+      {{.}}
+      {{/guessesLeft}}
+    </h1>
+    <h1>
+      <p>Holder: {{holderForCorrectLetters}}</p>
+      <p>This is the word:{{randomValue}}</p>
+    </h1>
+    <form action="/" method="post">
+      <input type="text" name="guess" placeholder="type a guess">
+      <button type="submit">Click to guess!</button>
+    </form>
+    <h2>
+      {{#lettersGuessed}}
+      {{.}}
+      {{/lettersGuessed}}
+    </h2>
+  </body>
+
+</html>
