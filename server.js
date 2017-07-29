@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({extended : true}));
 let lettersGuessed = '';
 let guessesLeft = 0;
 let holderForCorrectLetters = '';
+let randomValue = words;
 
 function generation(req, res){
   let randomValue = words[Math.floor(words.length * Math.random())];
@@ -34,14 +35,14 @@ function generation(req, res){
   req.session.lettersGuessed = lettersGuessed;
   req.session.guessesLeft = guessesLeft;
   req.session.randomValue = randomValue;
-  req.session.holderForCorrectLetters = holderForCorrectLetters
+  req.session.holderForCorrectLetters = holderForCorrectLetters;
   console.log("word right now:", randomValue);
 
   res.render('index', items = {
     lettersGuessed: req.session.lettersGuessed,
     guessesLeft: req.session.guessesLeft,
     randomValue: req.session.randomValue,
-    holderForCorrectLetters = req.session.holderForCorrectLetters
+    holderForCorrectLetters: req.session.holderForCorrectLetters
   });
 }
 // get mustache.index in views and render it to localhost.
@@ -56,18 +57,19 @@ app.post('/', function(req, res){
 
   let guess = req.body.guess;
 
-  if (guess == randomValue) {
-    lettersGuessed.push(guess)
+  if (randomValue.includes(guess)) {
+    items.lettersGuessed.push(guess)
     holderForCorrectLetters += guess;
     guessesLeft -= 1;
   }
   else {
     guessesLeft -= 1;
-  } if (guessesLeft = 0;){
+  } if (guessesLeft === 0){
     holderForCorrectLetters = randomValue;
     lettersGuessed.clear;
     lettersGuessed = "You ran out of time!";
   }
+  generation(req, res);
 })
 
 
