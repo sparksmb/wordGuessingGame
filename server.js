@@ -9,11 +9,14 @@ const app = express();
 
 app.use(expressValidator());
 
+app.use(express.static('public')); //for css
+
 app.use(session({
   secret: 'You Lost the Game.',
   resave: false,
   saveUninitialized: true
 }));
+
 
 const findLetters = function(word, letter) {
   const indices = [];
@@ -42,9 +45,8 @@ app.get('/', function(req, res) {
 
   req.session.guesses = [];
   req.session.correctGuesses = [];
-  req.session.guessesLeft = 2;
+  req.session.guessesLeft = 8;
   req.session.randomWord = words[ Math.floor(words.length * Math.random()) ];
-  // req.session.randomWord = 'foo';
 
   const letters = req.session.randomWord.split('');
   req.session.letters = [];
@@ -69,13 +71,11 @@ app.post('/', function(req, res) {
     req.session.letters[index].markup = `<span style="text-decoration:underline">${guess}</span>`;
     req.session.letters[index].guessed = true;
   }
-
   if (req.session.randomWord.includes(guess)) {
     req.session.correctGuesses.push(guess);
   } else {
     req.session.guessesLeft -= 1;
   }
-
   if (!req.session.guessesLeft) {
     for (let i = 0; i < req.session.letters.length; i++) {
       if (!req.session.letters[i].guessed) {
