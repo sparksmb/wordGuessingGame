@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>You won!</title>
+  </head>
+
+  <body>
+    <h3>You won!!</h3>
+
+    <h2>Letters: {{#letters}}{{{markup}}} {{/letters}}</h2>
+
+    <h3>You had {{ guessesLeft }} guesses left!</h3>
+    <h3>
+      <p>You guessed the letters... {{#guesses}}{{.}} {{/guesses}}</p>
+    </h3>
+
+    <a href='/'><h2>Play Again? Click here!</h2></a>
+  </body>
+
+</html>

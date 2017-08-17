@@ -76,6 +76,11 @@ app.post('/', function(req, res) {
   } else {
     req.session.guessesLeft -= 1;
   }
+  if (req.session.correctGuesses.length === req.session.randomWord.length) {
+    res.redirect('/winner', req.session);
+    req.session.destroy;
+    return;
+  }
   if (!req.session.guessesLeft) {
     for (let i = 0; i < req.session.letters.length; i++) {
       if (!req.session.letters[i].guessed) {
@@ -83,10 +88,9 @@ app.post('/', function(req, res) {
       }
     }
   }
-
   res.render('index', req.session);
 })
 
-app.listen(5555, function() {
-  console.log('listening on port 5555!');
+app.listen(process.env.PORT, () => {
+  console.log(`Listening on port ${process.env.PORT}`);
 });

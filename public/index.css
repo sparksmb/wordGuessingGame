@@ -1,0 +1,32 @@
+body {
+  display:flex;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  padding-top: 5%;
+  background-color: #bccecd;
+  font-family: 'Mada', sans-serif;
+}
+
+#container {
+  color: #965658;
+  background-color: #f0e1e2;
+  height: 40%;
+  width: 40%;
+  border: #166f6d solid 3px;
+  padding: 7%;
+}
+
+#button{
+  margin-left: auto;
+  height:3vh;
+  border: none;
+  background: #333;
+  color: #f2f2f2;
+  border-radius: 1px;
+}
+
+#button:hover {
+  background-color: white;
+  color: black;
+}
