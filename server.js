@@ -1,11 +1,20 @@
 const fs = require('file-system');
-const words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
 const express = require('express');
 const mustacheExpress = require('mustache-express');
 const expressValidator = require('express-validator');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+require('dotenv').config();
 const app = express();
+let words;
+
+if (process.env.PORT === 'development') {
+  words = fs.readFileSync('/somanywords.txt').split("\n");
+  return words;
+} else {
+  words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
+  return words;
+}
 
 app.use(expressValidator());
 
