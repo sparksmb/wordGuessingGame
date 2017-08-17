@@ -8,12 +8,10 @@ require('dotenv').config();
 const app = express();
 let words;
 
-if (process.env.PORT === 'development') {
-  words = fs.readFileSync('/somanywords.txt').split("\n");
-  return words;
-} else {
+if (process.env.NODE_ENV === 'development') {
   words = fs.readFileSync("/usr/share/dict/words", "utf-8").toLowerCase().split("\n");
-  return words;
+} else {
+  words = fs.readFileSync('/somanywords.txt').split("\n");
 }
 
 app.use(expressValidator());
